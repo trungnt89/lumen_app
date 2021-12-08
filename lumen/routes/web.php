@@ -17,7 +17,14 @@ function ConnectDB()
     $USERNAME = "root";
     $PASSWORD = "root";
     $DATABASE = "company";
-    return new mysqli($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE);
+   
+    $conn = new mysqli($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } else {
+        //echo "Connected to MySQL server successfully!!!";
+    }
+    return $conn;
 }
 
 $router->get('/', function () use ($router) {
