@@ -43,3 +43,5 @@
     docker container ls docker stop 12a32e8928ef 
     docker run -dp 8003:80 <image_name>
     docker exec -it <container> bash
+
+    
