@@ -18,11 +18,14 @@
     docker-compose up --build
 
 # Database
-   http://localhost:8080/
-   User/Pass: root/root
-   Add Database : company
-   Add table : Users(id,name)
 
+   http://localhost:8080/
+   
+   User/Pass: root/root
+   
+   Add Database : company
+   
+   Add table : Users(id,name)
 # Run 
     http://localhost:8000/
 
