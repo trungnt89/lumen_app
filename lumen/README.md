@@ -1,24 +1,45 @@
-# Lumen PHP Framework
+# Setup Composer
+    https://lar.edu.vn/huong-dan-cai-dat-composerphar-bo-quan-ly-thu-vien-danh-cho-php.html
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+# Install Lumen
+    composer -v
+    composer create-project --prefer-dist laravel/lumen lumen_app
+    php -S localhost:8000 -t public
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+# Docker Check Version
+    docker -v
+    docker-compose -v
 
-## Official Documentation
+# Docker Setup
+    Dockerfile
+    docker-compose.yml
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+# Build 
+    docker-compose up --build
 
-## Contributing
+# Database
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   http://localhost:8080/
+   
+   User/Pass: root/root
+   
+   Add Database : company
+   
+   Add table : Users(id,name)
+# Run 
+    http://localhost:8000/
 
-## Security Vulnerabilities
+ 
+# Refer :
+    https://yossiabramov.com/blog/setting-up-lumen-and-mysql-with-docker-part-i
+    https://yossiabramov.com/blog/setting-up-lumen-and-mysql-with-docker-part-ii
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+# Remove
+    docker rm -vf $(docker ps -aq);
+    docker rmi -f $(docker images -aq);
+    docker volume rm $(docker volume ls -q)
 
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Other
+    docker container ls docker stop 12a32e8928ef 
+    docker run -dp 8003:80 <image_name>
+    docker exec -it <container> bash
