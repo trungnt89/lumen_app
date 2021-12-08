@@ -18,13 +18,19 @@ function ConnectDB()
     $PASSWORD = "root";
     $DATABASE = "company";
    
-    $conn = new mysqli($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } else {
-        //echo "Connected to MySQL server successfully!!!";
+    try {
+        $conn = new mysqli($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } else {
+            //echo "Connected to MySQL server successfully!!!";
+        }
+        return $conn;
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
     }
-    return $conn;
+
+   
 }
 
 $router->get('/', function () use ($router) {
@@ -87,3 +93,23 @@ $router->get('/del', function () use ($router) {
 $router->get('/test', function () use ($router) {
    return "Hello World!!";
 });
+
+
+$router->get('/test2', function () use ($router) {
+    $HOSTNAME = "db";
+    $USERNAME = "root";
+    $PASSWORD = "root";
+    $DATABASE = "company";
+   
+    try {
+        $conn = new mysqli($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } else {
+            //echo "Connected to MySQL server successfully!!!";
+        }
+        return $conn;
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
+ });
