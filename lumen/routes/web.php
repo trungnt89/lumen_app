@@ -28,6 +28,7 @@ function ConnectDB()
         return $conn;
     } catch (Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
+        exit(); 
     }
 
    
