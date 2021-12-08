@@ -82,3 +82,8 @@ $router->get('/del', function () use ($router) {
     $res["result"]  = $result;
     return json_encode($res);
 });
+
+
+$router->get('/test', function () use ($router) {
+   return "Hello World!!";
+});
