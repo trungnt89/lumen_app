@@ -78,7 +78,7 @@ $router->get('/del', function () use ($router) {
         $sql = "DELETE FROM users WHERE id=".$_REQUEST["id"];
         $result= $conn ->query($sql);
         if (!$result === TRUE){
-            echo "Insert error!";exit();
+            echo "Delete error!";exit();
         }
         $conn->close();
     }
