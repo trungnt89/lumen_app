@@ -44,73 +44,68 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->get('/get', function () use ($router) {
-    $conn = ConnectDB();
-    $sql = 'SELECT * FROM users';
-    if ($result = $conn->query($sql)) {
-        while ($data = $result->fetch_object()) {
-            $users[] = $data;
+$router->get('/get', function () use ($router) {   
+    try {
+        $conn = ConnectDB();
+        $sql = 'SELECT * FROM users';
+        if ($result = $conn->query($sql)) {
+            while ($data = $result->fetch_object()) {
+                $users[] = $data;
+            }
         }
+        $conn->close();
+        return json_encode($users);
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        exit(); 
     }
-    $conn->close();
-    return json_encode($users);
 });
 
 
 $router->get('/add', function () use ($router) {
-    $conn = ConnectDB();
-    if(isset($_REQUEST["name"]) && $_REQUEST["name"] != ""){
-        $sql = "INSERT INTO users (name) VALUES('".$_REQUEST["name"]."')";
-        $result = $conn->query($sql);
-        if (!$result === TRUE){
-            echo "Insert error!";exit();
+    try {
+        $conn = ConnectDB();
+        if(isset($_REQUEST["name"]) && $_REQUEST["name"] != ""){
+            $sql = "INSERT INTO users (name) VALUES('".$_REQUEST["name"]."')";
+            $result = $conn->query($sql);
+            if (!$result === TRUE){
+                echo "Insert error!";exit();
+            }
+            $conn->close();
         }
-        $conn->close();
-    }
 
-    $res["act"]     = "add";
-    $res["result"]  = $result;
-    return json_encode($res);
+        $res["act"]     = "add";
+        $res["result"]  = $result;
+        return json_encode($res);
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        exit(); 
+    }
 });
 
 $router->get('/del', function () use ($router) {
-    $conn = ConnectDB();
-    if(isset($_REQUEST["id"]) && $_REQUEST["id"] != ""){
-        $sql = "DELETE FROM users WHERE id=".$_REQUEST["id"];
-        $result= $conn ->query($sql);
-        if (!$result === TRUE){
-            echo "Delete error!";exit();
+    try {
+        $conn = ConnectDB();
+        if(isset($_REQUEST["id"]) && $_REQUEST["id"] != ""){
+            $sql = "DELETE FROM users WHERE id=".$_REQUEST["id"];
+            $result= $conn ->query($sql);
+            if (!$result === TRUE){
+                echo "Delete error!";exit();
+            }
+            $conn->close();
         }
-        $conn->close();
+        
+        $res["act"]     = "del";
+        $res["id"]      = $_REQUEST["id"];
+        $res["result"]  = $result;
+        return json_encode($res);
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        exit(); 
     }
-    
-    $res["act"]     = "del";
-    $res["id"]      = $_REQUEST["id"];
-    $res["result"]  = $result;
-    return json_encode($res);
 });
 
 
 $router->get('/test', function () use ($router) {
    return "Hello World!!";
 });
-
-
-$router->get('/test2', function () use ($router) {
-    $HOSTNAME = "db";
-    $USERNAME = "root";
-    $PASSWORD = "root";
-    $DATABASE = "company";
-   
-    try {
-        $conn = new mysqli($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } else {
-            //echo "Connected to MySQL server successfully!!!";
-        }
-        return $conn;
-    } catch (Exception $e) {
-        echo 'Caught exception: ',  $e->getMessage(), "\n";
-    }
- });
